@@ -13,6 +13,7 @@ jobs:
 
     steps:
     - name: HashiCorp - Setup Terraform
+      uses: hashicorp/setup-terraform@v2.0.3
 
     - name: TERRAFORM INIT
       run: terraform init
@@ -22,20 +23,23 @@ jobs:
       
     - name: TERRAFORM VALIDATE
       run: terraform validate
-  
-  TERRAFORM_PLAN_APPLY:
-    name: TERRAFORM PLAN AND APPLY
-    runs-on: self-hosted
-    needs: TERRAFORM_INITIALISE_INT_LINTING_PLAN
-
-    steps:
-    - name: HashiCorp - Setup Terraform
 
     - name: TERRAFORM PLAN
-      run: terraform plan    
+      run: terraform plan
+  
+  # TERRAFORM_PLAN_APPLY:
+  #   name: TERRAFORM PLAN AND APPLY
+  #   runs-on: self-hosted
+  #   needs: TERRAFORM_INITIALISE_INT_LINTING_PLAN
 
-    - name: TERRAFORM APPLY
-      run: terraform apply -auto-approve
+  #   steps:
+  #   - name: HashiCorp - Setup Terraform
+
+  #   - name: TERRAFORM PLAN
+  #     run: terraform plan    
+
+  #   - name: TERRAFORM APPLY
+  #     run: terraform apply -auto-approve
       
     
     

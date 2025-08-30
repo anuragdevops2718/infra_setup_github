@@ -1,0 +1,42 @@
+name : "Infra Provisioning with Terraform"
+
+on:
+  push:
+    branches:
+    - main
+    - feature/**
+
+jobs:
+  TERRAFORM_INITIALISE_INT_LINTING_PLAN:
+    name: TERRAFORM INITIALISE AND INT AND LINTING
+    runs-on: self-hosted
+
+    steps:
+    - name: HashiCorp - Setup Terraform
+
+    - name: TERRAFORM INIT
+      run: terraform init
+
+    - name: TERRAFORM LINT
+      run: terraform fmt
+      
+    - name: TERRAFORM VALIDATE
+      run: terraform validate
+  
+  TERRAFORM_PLAN_APPLY:
+    name: TERRAFORM PLAN AND APPLY
+    runs-on: self-hosted
+    needs: TERRAFORM_INITIALISE_INT_LINTING_PLAN
+
+    steps:
+    - name: HashiCorp - Setup Terraform
+
+    - name: TERRAFORM PLAN
+      run: terraform plan    
+
+    - name: TERRAFORM APPLY
+      run: terraform apply -auto-approve
+      
+    
+    
+    
